@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>tomoyo's first blog | Tomoyo</title><meta name="author" content="sakagami tomoyo"><meta name="copyright" content="sakagami tomoyo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="tomoyo&#96;s first blog用来写什么？2024-12-3-15:32 Nefu 校园内（是的,bro,这个时候你刚刚考完万恶的系统分析 🙃，周五还有计组，5 章一张没看） 会用来记录 tomoy&#96;s blog 的发展和维护（虽然是静态页面 😂,仓库里是 html,css,js，但以后会添加一些好玩的功能的 🤗,锻炼一下自己贫瘠的脑子。） 由于自身的能力限制，无法添">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tomoyo&#39;s first blog">
+<meta property="og:url" content="https://tomoyo.link/posts/30662.html">
+<meta property="og:site_name" content="Tomoyo">
+<meta property="og:description" content="tomoyo&#96;s first blog用来写什么？2024-12-3-15:32 Nefu 校园内（是的,bro,这个时候你刚刚考完万恶的系统分析 🙃，周五还有计组，5 章一张没看） 会用来记录 tomoy&#96;s blog 的发展和维护（虽然是静态页面 😂,仓库里是 html,css,js，但以后会添加一些好玩的功能的 🤗,锻炼一下自己贫瘠的脑子。） 由于自身的能力限制，无法添">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://istomoyo.github.io/posts/30662/coverImg.png">
+<meta property="article:published_time" content="2024-12-03T07:56:38.000Z">
+<meta property="article:modified_time" content="2024-12-03T07:56:38.000Z">
+<meta property="article:author" content="sakagami tomoyo">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="First Post">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://istomoyo.github.io/posts/30662/coverImg.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "tomoyo's first blog",
+  "url": "https://tomoyo.link/posts/30662.html",
+  "image": "https://istomoyo.github.io/posts/30662/coverImg.png",
+  "datePublished": "2024-12-03T07:56:38.000Z",
+  "dateModified": "2024-12-03T07:56:38.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "sakagami tomoyo",
+      "url": "https://tomoyo.link/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://tomoyo.link/posts/30662.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'tomoyo\'s first blog',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/live2dModals.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(https://www.loliapi.com/acg/);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/Music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://istomoyo.github.io/posts/30662/coverImg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Tomoyo</span></a><a class="nav-page-title" href="/"><span class="site-name">tomoyo's first blog</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/Music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">tomoyo's first blog</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-03T07:56:38.000Z" title="发表于 2024-12-03 15:56:38">2024-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-03T07:56:38.000Z" title="更新于 2024-12-03 15:56:38">2024-12-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">271</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="tomoyo-s-first-blog"><a href="#tomoyo-s-first-blog" class="headerlink" title="tomoyo&#96;s first blog"></a>tomoyo&#96;s first blog</h1><h3 id="用来写什么？"><a href="#用来写什么？" class="headerlink" title="用来写什么？"></a>用来写什么？</h3><p>2024-12-3-15:32 Nefu 校园内（是的,bro,这个时候你刚刚考完万恶的系统分析 🙃，周五还有计组，5 章一张没看）</p>
+<p>会用来记录 tomoy&#96;s blog 的发展和维护（虽然是静态页面 😂,仓库里是 html,css,js，但以后会添加一些好玩的功能的 🤗,锻炼一下自己贫瘠的脑子。）</p>
+<p>由于自身的能力限制，无法添加好看的页面或者功能（比如添加评论？视频？）</p>
+<p>而且面临考研，任务艰巨…但万事开头难，先做起来，之后在去慢慢修改喽 😇</p>
+<img src="https://cdn.jsdelivr.net/gh/istomoyo/istomoyo.github.io@main/posts/30662/1.png" alt="みっくみく！！！_0" style="zoom:50%;" />
+
+<h3 id="2024-12-12"><a href="#2024-12-12" class="headerlink" title="2024-12-12"></a>2024-12-12</h3><ol>
+<li>更新了更好的部署方式，源码放在了私有仓库。</li>
+<li>添加了搜索功能。</li>
+</ol>
+<img src="https://istomoyo.github.io/posts/13653/coverImg.jpg">
+
+<h3 id="2025-1-16"><a href="#2025-1-16" class="headerlink" title="2025-1-16"></a>2025-1-16</h3><p>1.添加音乐（两首音乐都来自我最喜欢的动漫之中，SWEET DROPS 是白兔糖[白兔玩偶]的 op，Childhood 是乒乓中的一段 bgm😗）</p>
+<div style="width:100%; display:flex; justify-content: center; ">
+<img src="./30662/baitutang.png"
+     style="display:block; width:40%; object-fit: contain;">
+    <img src="./30662/pingpang.jpg"
+         style="display:block; width:40%; object-fit: contain;">
+</div>
+
+<p>2.样式进行细微调整</p>
+<h3 id="2025-2-11"><a href="#2025-2-11" class="headerlink" title="2025-2-11"></a>2025-2-11</h3><p>1.添加看板娘<a href="%5B%5Blive2D%E5%85%8D%E8%B4%B9%E6%A8%A1%E5%9E%8B/%E6%8D%8F%E8%84%B8%5DMO_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1iY411S7Rd/?spm_id_from=333.337.search-card.all.click&vd_source=f5f4a2cb8283165a364cff0e793d3f2f)">MO</a>（随便选的,免费的）😙</p>
+<p>2.使用Giscus添加评论功能</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://tomoyo.link">sakagami tomoyo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://tomoyo.link/posts/30662.html">https://tomoyo.link/posts/30662.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://tomoyo.link" target="_blank">Tomoyo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Blog/">Blog</a><a class="post-meta__tags" href="/tags/First-Post/">First Post</a></div><div class="post-share"><div class="social-share" data-image="https://istomoyo.github.io/posts/30662/coverImg.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/posts/13653.html" title="Hexo自动部署到GithubAction"><img class="cover" src="https://istomoyo.github.io/posts/13653/coverImg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hexo自动部署到GithubAction</div></div><div class="info-2"><div class="info-item-1">前言之前一直是本地生成静态页面，然后 deploy 到仓库里。但觉得这样不够优雅，并且想要临时修改的话就只能在电脑上修改，其他移动设备上无法临时修改。所以参考https://akilar.top/posts/f752c86d/ Akilar大佬的博客，对我的博客进行修改，也从一个小白的视角进行记录。（这篇文章就是采用新的部署方式） 准备准备两个仓库，一个 private，一个 public。private 用于存储 hexo 源码，（为什么是 private?因为要用到 token 信息）。用于监测 push，然后把生成的静态文件推送到这个 public 的仓库里。 public 起名 istomoyo(你的用户名).github.io。 获取 Token[Github-&gt;头像（右上角）-&gt;Settings-&gt;Developer Settings-&gt;Personal access tokens-&gt; 在这 Token(classic)   Generate new token   名称随便起，时长选择永久，勾选 workflow 和...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/13653.html" title="Hexo自动部署到GithubAction"><img class="cover" src="https://istomoyo.github.io/posts/13653/coverImg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-12</div><div class="info-item-2">Hexo自动部署到GithubAction</div></div><div class="info-2"><div class="info-item-1">前言之前一直是本地生成静态页面，然后 deploy 到仓库里。但觉得这样不够优雅，并且想要临时修改的话就只能在电脑上修改，其他移动设备上无法临时修改。所以参考https://akilar.top/posts/f752c86d/ Akilar大佬的博客，对我的博客进行修改，也从一个小白的视角进行记录。（这篇文章就是采用新的部署方式） 准备准备两个仓库，一个 private，一个 public。private 用于存储 hexo 源码，（为什么是 private?因为要用到 token 信息）。用于监测 push，然后把生成的静态文件推送到这个 public 的仓库里。 public 起名 istomoyo(你的用户名).github.io。 获取 Token[Github-&gt;头像（右上角）-&gt;Settings-&gt;Developer Settings-&gt;Personal access tokens-&gt; 在这 Token(classic)   Generate new token   名称随便起，时长选择永久，勾选 workflow 和...</div></div></div></a><a class="pagination-related" href="/posts/63693.html" title="hexo引入live2d看板娘"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-11</div><div class="info-item-2">hexo引入live2d看板娘</div></div><div class="info-2"><div class="info-item-1">缘由在知乎上刷到了一个关于[live2d看板娘](博客园页面的这个姑娘动画是怎么生成的？ - 知乎https://www.zhihu.com/question/659058271)的提问，提起了我的兴趣。自己也在`bilibili`上随便找了一个模型（为后面的不兼容埋下伏笔）。 踩坑网上大部分教程都是采用hexo-helper-live2d。经过一系列操作，报错。看控制台的报错是路径拼接有问题。我去逆向，发现配置不对   这个模型原本是被用于虚拟主播使用的公共模型，和hexo-helper-live2d并不兼容。 可替换为oh-my-live2d,无论是版本2，3都支持。 在Hexo项目的根目录中的_config.yml配置 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889#...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">sakagami tomoyo</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/istomoyo"><i class="fab fa-github"></i><span>Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/istomoyo" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1138629583@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tomoyo-s-first-blog"><span class="toc-number">1.</span> <span class="toc-text">tomoyo&#96;s first blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%9D%A5%E5%86%99%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.1.</span> <span class="toc-text">用来写什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-12-12"><span class="toc-number">1.0.2.</span> <span class="toc-text">2024-12-12</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2025-1-16"><span class="toc-number">1.0.3.</span> <span class="toc-text">2025-1-16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2025-2-11"><span class="toc-number">1.0.4.</span> <span class="toc-text">2025-2-11</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/62595.html" title="Ts(小满zs)">Ts(小满zs)</a><time datetime="2025-11-14T15:51:58.000Z" title="发表于 2025-11-14 23:51:58">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/56801.html" title="Ts(张天禹)">Ts(张天禹)</a><time datetime="2025-11-14T15:45:21.000Z" title="发表于 2025-11-14 23:45:21">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/57292.html" title="jsNote">jsNote</a><time datetime="2025-04-11T14:39:33.000Z" title="发表于 2025-04-11 22:39:33">2025-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/31564.html" title="某某音乐搜索js逆向练习">某某音乐搜索js逆向练习</a><time datetime="2025-02-13T05:20:22.000Z" title="发表于 2025-02-13 13:20:22">2025-02-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/63693.html" title="hexo引入live2d看板娘">hexo引入live2d看板娘</a><time datetime="2025-02-11T12:36:23.000Z" title="发表于 2025-02-11 20:36:23">2025-02-11</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(-225deg, rgba(105, 234, 203, 0.9) 0%, rgba(234, 204, 248, 0.9) 48%, rgba(102, 84, 241, 0.9) 100%);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By sakagami tomoyo</div><div class="footer_custom_text"><p>
+  <a style="margin-inline:5px" target="_blank" href="https://hexo.io/">
+    <img no-lazy src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO">
+  </a>
+  <a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/">
+    <img no-lazy src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly">
+  </a>
+  <a style="margin-inline:5px" target="_blank" href="https://github.com/">
+    <img no-lazy src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站由 GitHub 托管" alt="GitHub">
+  </a>
+</p>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'istomoyo/istomoyo.github.io',
+      'data-repo-id': 'R_kgDONcWmIA',
+      'data-category-id': 'DIC_kwDONcWmIM4Cm3Pm',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="9414534383" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
