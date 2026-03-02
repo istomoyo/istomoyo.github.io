@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>typescript-小满 | Tomoyo</title><meta name="author" content="sakagami tomoyo"><meta name="copyright" content="sakagami tomoyo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="小满 zs-TypeScript简介 链接：小满 TypeScript 基础教程全集（完结）个人学习笔记（基于视频与小满博客整理）  学习 TypeScript19（Mixins 混入）TypeScript 混入 Mixins 其实 vue 也有mixins这个东西 你可以把他看作为合并 对象混入可以使用 es6 的Object.assign合并多个对象 此时people 会被推断成一个交差类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typescript-小满">
+<meta property="og:url" content="https://istomoyo.github.io/posts/58732.html">
+<meta property="og:site_name" content="Tomoyo">
+<meta property="og:description" content="小满 zs-TypeScript简介 链接：小满 TypeScript 基础教程全集（完结）个人学习笔记（基于视频与小满博客整理）  学习 TypeScript19（Mixins 混入）TypeScript 混入 Mixins 其实 vue 也有mixins这个东西 你可以把他看作为合并 对象混入可以使用 es6 的Object.assign合并多个对象 此时people 会被推断成一个交差类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://istomoyo.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-11-26T12:43:04.000Z">
+<meta property="article:modified_time" content="2025-11-26T12:43:04.000Z">
+<meta property="article:author" content="sakagami tomoyo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://istomoyo.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "typescript-小满",
+  "url": "https://istomoyo.github.io/posts/58732.html",
+  "image": "https://istomoyo.github.io/img/avatar.jpg",
+  "datePublished": "2025-11-26T12:43:04.000Z",
+  "dateModified": "2025-11-26T12:43:04.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "sakagami tomoyo",
+      "url": "https://istomoyo.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://istomoyo.github.io/posts/58732.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'typescript-小满',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/live2dModals.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(https://www.loliapi.com/acg/);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/Music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/defaultImg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Tomoyo</span></a><a class="nav-page-title" href="/"><span class="site-name">typescript-小满</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/Music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">typescript-小满</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-26T12:43:04.000Z" title="发表于 2025-11-26 20:43:04">2025-11-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-26T12:43:04.000Z" title="更新于 2025-11-26 20:43:04">2025-11-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="小满-zs-TypeScript"><a href="#小满-zs-TypeScript" class="headerlink" title="小满 zs-TypeScript"></a>小满 zs-TypeScript</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wR4y1377K">小满 TypeScript 基础教程全集（完结）</a><br>个人学习笔记（基于视频与小满博客整理）</p>
+</blockquote>
+<h2 id="学习-TypeScript19（Mixins-混入）"><a href="#学习-TypeScript19（Mixins-混入）" class="headerlink" title="学习 TypeScript19（Mixins 混入）"></a>学习 TypeScript19（Mixins 混入）</h2><p><code>TypeScript</code> 混入 <code>Mixins</code> 其实 vue 也有<code>mixins</code>这个东西 你可以把他看作为合并</p>
+<h3 id="对象混入"><a href="#对象混入" class="headerlink" title="对象混入"></a>对象混入</h3><p>可以使用 es6 的<code>Object.assign</code>合并多个对象</p>
+<p>此时<code>people</code> 会被推断成一个交差类型 <code>Name &amp; Age &amp; sex</code>;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">interface Name &#123;</span><br><span class="line">    name: string</span><br><span class="line">&#125;</span><br><span class="line">interface Age &#123;</span><br><span class="line">    age: number</span><br><span class="line">&#125;</span><br><span class="line">interface Sex &#123;</span><br><span class="line">    sex: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let people1: Name = &#123; name: &quot;小满&quot; &#125;</span><br><span class="line">let people2: Age = &#123; age: 20 &#125;</span><br><span class="line">let people3: Sex = &#123; sex: 1 &#125;</span><br><span class="line"></span><br><span class="line">//扩展运算符 浅拷贝 返回新的类型</span><br><span class="line">let c = &#123;...people1,...people2,...people3&#125;;</span><br><span class="line"></span><br><span class="line">//2. Object.assign 浅拷贝 交叉类型</span><br><span class="line">const people = Object.assign(people1,people2,people3)</span><br><span class="line">//3. 深拷贝</span><br><span class="line">structuredClone(people1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类的混入"><a href="#类的混入" class="headerlink" title="类的混入"></a>类的混入</h3><p>首先声明两个<code>mixins</code>类 （严格模式要关闭不然编译不过）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    type: boolean = false;</span><br><span class="line">    changeType() &#123;</span><br><span class="line">        this.type = !this.type</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class B &#123;</span><br><span class="line">    name: string = &#x27;张三&#x27;;</span><br><span class="line">    getName(): string &#123;</span><br><span class="line">        return this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面创建一个类，结合了这两个<code>mixins</code></p>
+<p>首先应该注意到的是，没使用<code>extends</code>而是使用<code>implements</code>。 把类当成了接口</p>
+<p>我们可以这么做来达到目的，为将要<code>mixin</code>进来的属性方法创建出占位属性。 这告诉编译器这些成员在运行时是可用的。 这样就能使用<code>mixin</code>带来的便利，虽说需要提前定义一些占位属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class C implements A,B&#123;</span><br><span class="line">    type:boolean</span><br><span class="line">    changeType:()=&gt;void;</span><br><span class="line">    name: string;</span><br><span class="line">    getName:()=&gt; string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，创建这个帮助函数，帮我们做混入操作。 它会遍历<code>mixins</code>上的所有属性，并复制到目标上去，把之前的占位属性替换成真正的实现代码</p>
+<p><code>Object.getOwnPropertyNames()</code>可以获取对象自身的属性，除去他继承来的属性，<br>对它所有的属性遍历，它是一个数组，遍历一下它所有的属性名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Mixins(C, [A, B])</span><br><span class="line">function Mixins(curCls: any, itemCls: any[]) &#123;</span><br><span class="line">    itemCls.forEach(item =&gt; &#123;</span><br><span class="line">        Object.getOwnPropertyNames(item.prototype).forEach(name =&gt; &#123;</span><br><span class="line">            curCls.prototype[name] = item.prototype[name]</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//插件类型的混入</span><br><span class="line">class Logger&#123;</span><br><span class="line">    log(msg:string)&#123;</span><br><span class="line">        console.log(&quot;log&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Html&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        console.log(&#x27;render&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class App&#123;</span><br><span class="line">    run()&#123;</span><br><span class="line">        console.log(&#x27;run&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//类型约束</span><br><span class="line">type Constructor&lt;T&gt; = new (...args:any[])=&gt;T</span><br><span class="line">//插件类型的混入</span><br><span class="line">function plugMixins&lt;T extends Constructor&lt;App&gt;&gt;(base:T)&#123;</span><br><span class="line">    return class extends base&#123;</span><br><span class="line">        private Logger =  new Logger()</span><br><span class="line">        private Html = new Html()</span><br><span class="line">        constructor(...args:any[])&#123;</span><br><span class="line">            super(...args)</span><br><span class="line">            this.Logger = new Logger();</span><br><span class="line">            this.Html = new Html();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        run()&#123;</span><br><span class="line">            this.Logger.log(&#x27;run&#x27;)</span><br><span class="line">        &#125;</span><br><span class="line">        render()&#123;</span><br><span class="line">            this.Logger.log(&#x27;render&#x27;)</span><br><span class="line">            this.Html.render()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const mixins = plugMixins(App);</span><br><span class="line"></span><br><span class="line">const app = new mixins();</span><br><span class="line"></span><br><span class="line">app.run();</span><br></pre></td></tr></table></figure>
+
+<h2 id="学习-TypeScript20（装饰器-Decorator）"><a href="#学习-TypeScript20（装饰器-Decorator）" class="headerlink" title="学习 TypeScript20（装饰器 Decorator）"></a>学习 TypeScript20（装饰器 Decorator）</h2><blockquote>
+<p>Decorator 装饰器是一项实验性特性，在未来的版本中可能会发生改变<br>它们不仅增加了代码的可读性，清晰地表达了意图，而且提供一种方便的手段，增加或修改类的功能</p>
+</blockquote>
+<p>若要启用实验性的装饰器特性，你必须在命令行或 tsconfig.json 里启用编译器选项<br><img src="https://i-blog.csdnimg.cn/blog_migrate/55612d5653f546a8da028d6095307cae.png"></p>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><p>装饰器是一种特殊类型的声明，它能够被附加到类声明，方法， 访问符，属性或参数上。</p>
+<p>首先定义一个类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个类装饰器函数 他会把 ClassA 的构造函数传入你的 watcher 函数当做第一个参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const watcher: ClassDecorator = (target: Function) =&gt; &#123;</span><br><span class="line">    target.prototype.getParams = &lt;T&gt;(params: T):T =&gt; &#123;</span><br><span class="line">        return params</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候 直接通过@函数名使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@watcher</span><br><span class="line">class A &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const a = new A();</span><br><span class="line">console.log((a as any).getParams(&#x27;123&#x27;));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//1.类装饰器 ClassDecorator</span><br><span class="line">const Base:ClassDecorator = (target) =&gt;&#123;</span><br><span class="line">    console.log(target);</span><br><span class="line">    target.prototype.xiaoman = &#x27;小满&#x27;</span><br><span class="line">    target.prototype.fn = () =&gt;&#123;</span><br><span class="line">        console.log(&#x27;我是韩寒&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Base</span><br><span class="line">class Http&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">const http = new Http() as any;</span><br><span class="line">console.log(http)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="装饰器工厂"><a href="#装饰器工厂" class="headerlink" title="装饰器工厂"></a>装饰器工厂</h3><p>其实也就是一个高阶函数 外层的函数接受值 里层的函数最终接受类的构造函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const watcher = (name: string): ClassDecorator =&gt; &#123;</span><br><span class="line">    return (target: Function) =&gt; &#123;</span><br><span class="line">        target.prototype.getParams = &lt;T&gt;(params: T): T =&gt; &#123;</span><br><span class="line">            return params</span><br><span class="line">        &#125;</span><br><span class="line">        target.prototype.getOptions = (): string =&gt; &#123;</span><br><span class="line">            return name</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@watcher(&#x27;name&#x27;)</span><br><span class="line">class A &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const a = new A();</span><br><span class="line">console.log((a as any).getParams(&#x27;123&#x27;));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//2. 装饰器工厂</span><br><span class="line">const Base = (name: string) =&gt; &#123;</span><br><span class="line">  const fn: ClassDecorator = (target) =&gt; &#123;</span><br><span class="line">    console.log(target);</span><br><span class="line">    target.prototype.xiaoman = name;</span><br><span class="line">    target.prototype.fn = () =&gt; &#123;</span><br><span class="line">      console.log(&quot;我是韩寒&quot;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">    return fn</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@Base(&#x27;xiao yu&#x27;)</span><br><span class="line">class Http &#123;&#125;</span><br><span class="line">const http = new Http() as any;</span><br><span class="line">console.log(http.xiaoman);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="装饰器组合"><a href="#装饰器组合" class="headerlink" title="装饰器组合"></a>装饰器组合</h3><p>就是可以使用多个装饰器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">const watcher = (name: string): ClassDecorator =&gt; &#123;</span><br><span class="line">    return (target: Function) =&gt; &#123;</span><br><span class="line">        target.prototype.getParams = &lt;T&gt;(params: T): T =&gt; &#123;</span><br><span class="line">            return params</span><br><span class="line">        &#125;</span><br><span class="line">        target.prototype.getOptions = (): string =&gt; &#123;</span><br><span class="line">            return name</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const watcher2 = (name: string): ClassDecorator =&gt; &#123;</span><br><span class="line">    return (target: Function) =&gt; &#123;</span><br><span class="line">        target.prototype.getNames = ():string =&gt; &#123;</span><br><span class="line">            return name</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@watcher2(&#x27;name2&#x27;)</span><br><span class="line">@watcher(&#x27;name&#x27;)</span><br><span class="line">class A &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const a = new A();</span><br><span class="line">console.log((a as any).getOptions());</span><br><span class="line">console.log((a as any).getNames());</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法装饰器"><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const Get = (url: string) =&gt; &#123;</span><br><span class="line">  const fn: MethodDecorator = (target, key, descriptor: PropertyDescriptor) =&gt; &#123;</span><br><span class="line">    console.log(&quot;target,key,descriptor :&gt;&gt; &quot;, target, key, descriptor);</span><br><span class="line">    axios.get(url).then((res) =&gt; &#123;</span><br><span class="line">      descriptor.value(res.data);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  return fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@Base(&quot;xiao yu&quot;)</span><br><span class="line">class Http &#123;</span><br><span class="line">  @Get(&quot;https://api.apiopen.top/api/getHaoKanVideo?page=0&amp;size=10&quot;)</span><br><span class="line">  getList(data: any) &#123;</span><br><span class="line">    console.log(&quot;data :&gt;&gt; &quot;, data.result.list);</span><br><span class="line">  &#125;</span><br><span class="line">  create() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数装饰器"><a href="#参数装饰器" class="headerlink" title="参数装饰器"></a>参数装饰器</h3><p>返回三个参数</p>
+<p>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。<br>成员的名字。<br>参数在函数参数列表中的索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ &#123;&#125;, &#x27;setParasm&#x27;, 0 ]</span><br><span class="line"></span><br><span class="line">const met:ParameterDecorator = (...args) =&gt; &#123;</span><br><span class="line">    console.log(args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    setParasm (@met name:string = &#x27;213&#x27;) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const a = new A();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import axios from &quot;axios&quot;;</span><br><span class="line">import &quot;reflect-metadata&quot;;</span><br><span class="line">const Base = (name: string) =&gt; &#123;</span><br><span class="line">  const fn: ClassDecorator = (target) =&gt; &#123;</span><br><span class="line">    console.log(target);</span><br><span class="line">    target.prototype.xiaoman = name;</span><br><span class="line">    target.prototype.fn = () =&gt; &#123;</span><br><span class="line">      console.log(&quot;我是韩寒&quot;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  return fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const Get = (url: string) =&gt; &#123;</span><br><span class="line">  const fn: MethodDecorator = (</span><br><span class="line">    target,</span><br><span class="line">    _: any,</span><br><span class="line">    descriptor: PropertyDescriptor</span><br><span class="line">  ) =&gt; &#123;</span><br><span class="line">    //console.log(&quot;target,key,descriptor :&gt;&gt; &quot;, target, key, descriptor);</span><br><span class="line">    const key = Reflect.getMetadata(&quot;key&quot;, target);</span><br><span class="line">    axios.get(url).then((res) =&gt; &#123;</span><br><span class="line">      descriptor.value(key ? res.data[key] : res.data);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  return fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const Result = () =&gt; &#123;</span><br><span class="line">  const fn: ParameterDecorator = (target, key, index) =&gt; &#123;</span><br><span class="line">    console.log(&quot;target,key,index :&gt;&gt; &quot;, target, key, index);</span><br><span class="line">    Reflect.defineMetadata(&quot;key&quot;, &quot;result&quot;, target);</span><br><span class="line">  &#125;;</span><br><span class="line">  return fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@Base(&quot;xiao yu&quot;)</span><br><span class="line">class Http &#123;</span><br><span class="line">  @Get(&quot;https://api.apiopen.top/api/getHaoKanVideo?page=0&amp;size=10&quot;)</span><br><span class="line">  getList(@Result() data: any) &#123;</span><br><span class="line">    console.log(&quot;data :&gt;&gt; &quot;, data);</span><br><span class="line">  &#125;</span><br><span class="line">  create() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">const http = new Http() as any;</span><br><span class="line">console.log(http.xiaoman);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="学习-TypeScript22（实战-TS-编写发布订阅模式）"><a href="#学习-TypeScript22（实战-TS-编写发布订阅模式）" class="headerlink" title="学习 TypeScript22（实战 TS 编写发布订阅模式）"></a>学习 TypeScript22（实战 TS 编写发布订阅模式）</h2><p>发布订阅模式是一种常见的设计模式，在许多场景中都有应用。我们可能已经在使用中接触过发布订阅模式，比如使用 addEventListener 方法来监听 DOM 事件、Vue 的事件总线机制等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//举例-自定义事件</span><br><span class="line"></span><br><span class="line">const cb = () =&gt; &#123;</span><br><span class="line">  console.log(&quot;触发了&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">document.addEventListener(</span><br><span class="line">  &quot;asd&quot;,</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    console.log(&quot;触发了&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    once: true,</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">document.removeEventListener(&quot;asd&quot;, cb);</span><br><span class="line"></span><br><span class="line">const e = new Event(&quot;asd&quot;);</span><br><span class="line"></span><br><span class="line">document.dispatchEvent(e);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">//需要实现:once on emit off 订阅中心Map&lt;事件名称,[Function]&gt;</span><br><span class="line">interface I &#123;</span><br><span class="line">  events: Map&lt;string, Function[]&gt;;</span><br><span class="line">  once: (event: string, callback: Function) =&gt; void; //触发一次订阅器</span><br><span class="line">  on: (event: string, callback: Function) =&gt; void; //订阅</span><br><span class="line">  emit: (event: string, ...args: any[]) =&gt; void; //派发</span><br><span class="line">  off: (event: string, callback: Function) =&gt; void; //删除监听器</span><br><span class="line">&#125;</span><br><span class="line">class Emitter implements I &#123;</span><br><span class="line">  events: Map&lt;string, Function[]&gt;;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.events = new Map();</span><br><span class="line">  &#125;</span><br><span class="line">  once(event: string, callback: Function) &#123;</span><br><span class="line">    const cb = (...args: any[]) =&gt; &#123;</span><br><span class="line">      callback(...args);</span><br><span class="line">      this.off(event, cb);</span><br><span class="line">    &#125;;</span><br><span class="line">    this.on(event, cb);</span><br><span class="line">  &#125;</span><br><span class="line">  off(event: string, callback: Function) &#123;</span><br><span class="line">    const callbackList = this.events.get(event);</span><br><span class="line">    if (callbackList) &#123;</span><br><span class="line">      callbackList.splice(callbackList.indexOf(callback), 1);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  on(event: string, callback: Function) &#123;</span><br><span class="line">    if (this.events.has(event)) &#123;</span><br><span class="line">      const callbackList = this.events.get(event);</span><br><span class="line">      callbackList &amp;&amp; callbackList.push(callback);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      this.events.set(event, [callback]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; //订阅</span><br><span class="line">  emit(event: string, ...args: any[]) &#123;</span><br><span class="line">    const callbackList: Function[] = this.events.get(event);</span><br><span class="line">    console.log(&quot;callbackList :&gt;&gt; &quot;, callbackList);</span><br><span class="line">    if (callbackList) &#123;</span><br><span class="line">      callbackList.forEach((fn: Function) =&gt; &#123;</span><br><span class="line">        fn(...args);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; //派发</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const bus = new Emitter();</span><br><span class="line">const fn = (b: Boolean, n: Number) =&gt; &#123;</span><br><span class="line">  console.log(1);</span><br><span class="line">&#125;;</span><br><span class="line">bus.on(&quot;message&quot;, fn);</span><br><span class="line">bus.off(&quot;message&quot;, fn);</span><br><span class="line">bus.once(&quot;message&quot;, fn);</span><br><span class="line">bus.emit(&quot;message&quot;, false, 1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="学习typeScript（weakMap，weakSet，set，map）"><a href="#学习typeScript（weakMap，weakSet，set，map）" class="headerlink" title="学习typeScript（weakMap，weakSet，set，map）"></a>学习typeScript（weakMap，weakSet，set，map）</h2><p>在es5的时候常用的Array object ，在es6又新增了两个类型，Set和Map，类似于数组和对象。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>集合是由一组无序且唯一(即不能重复)的项组成的，可以想象成集合是一个既没有重复元素，也没有顺序概念的数组</p>
+<p>属性</p>
+<p>size：返回字典所包含的元素个数</p>
+<p>操作方法</p>
+<p>add(value)：添加某个值，返回 Set 结构本身。</p>
+<p>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。</p>
+<p>has(value)：返回一个布尔值，表示该值是否为 Set 的成员。</p>
+<p>clear()：清除所有成员，无返回值。</p>
+<p>size: 返回set数据结构的数据长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let set:Set&lt;number&gt; = new Set([1,2,3,4])</span><br><span class="line"> </span><br><span class="line">set.add(5)</span><br><span class="line"> </span><br><span class="line">set.has(5)</span><br><span class="line"> </span><br><span class="line">set.delete(5)</span><br><span class="line"> </span><br><span class="line">set.size //4</span><br></pre></td></tr></table></figure>
+<p>去重</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [...new Set([1,1,1,2,2,3,4,5,5,5,5])]</span><br><span class="line"> </span><br><span class="line">console.log(arr); //[ 1, 2, 3, 4, 5 ]</span><br></pre></td></tr></table></figure>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; name: &#x27;小满&#x27; &#125;</span><br><span class="line">let map: Map&lt;object, Function&gt; = new Map()</span><br><span class="line"> </span><br><span class="line">map.set(obj, () =&gt; 123)</span><br><span class="line"> </span><br><span class="line">map.get(obj)</span><br><span class="line"> </span><br><span class="line">map.has(obj)</span><br><span class="line"> </span><br><span class="line">map.delete(obj)</span><br><span class="line"> </span><br><span class="line">map.size</span><br></pre></td></tr></table></figure>
+<p>操作方法同set</p>
+<h3 id="WeakSet-和-WeakMap"><a href="#WeakSet-和-WeakMap" class="headerlink" title="WeakSet 和 WeakMap"></a>WeakSet 和 WeakMap</h3><p>Weak 在英语的意思就是弱的意思，<code>weakSet</code> 和 <code>weakMap</code> 的键都是弱引用，不会被计入垃圾回收，我们来演示一下。</p>
+<p>首先obj引用了这个对象 + 1，aahph也引用了 + 1，wmap也引用了，但是不会  + 1，应为他是弱引用，不会计入垃圾回收，因此 obj 和 aahph 释放了该引用 weakMap 也会随着消失的，但是有个问题你会发现控制台能输出，值是取不到的，应为V8的GC回收是需要一定时间的，你可以延长到500ms看一看，并且为了避免这个问题不允许读取键值，也不允许遍历，同理weakSet 也一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let obj:any = &#123;name:&#x27;小满zs&#x27;&#125; //1</span><br><span class="line">let aahph:any = obj //2</span><br><span class="line">let wmap:WeakMap&lt;object,string&gt; = new WeakMap()</span><br><span class="line"> </span><br><span class="line">wmap.set(obj,&#x27;爱安徽潘慧&#x27;) //2 他的键是弱引用不会计数的</span><br><span class="line"> </span><br><span class="line">obj = null // -1</span><br><span class="line">aahph = null;//-1</span><br><span class="line">//v8 GC 不稳定 最少200ms</span><br><span class="line"> </span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">    console.log(wmap)</span><br><span class="line">&#125;,500)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="学习TypeScript23（TS进阶用法proxy-Reflect）"><a href="#学习TypeScript23（TS进阶用法proxy-Reflect）" class="headerlink" title="学习TypeScript23（TS进阶用法proxy &amp; Reflect）"></a>学习TypeScript23（TS进阶用法proxy &amp; Reflect）</h2><h3 id="学习proxy对象代理"><a href="#学习proxy对象代理" class="headerlink" title="学习proxy对象代理"></a>学习proxy对象代理</h3><p><code>Proxy</code> 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）</p>
+<p>target</p>
+<p>要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。</p>
+<p>handler</p>
+<p>一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。</p>
+<p>handler.get() 本次使用的get</p>
+<p>属性读取操作的捕捉器。</p>
+<p>handler.set() 本次使用的set</p>
+<p>属性设置操作的捕捉器。</p>
+<h3 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h3><p>与大多数全局对象不同Reflect并非一个构造函数，所以不能通过new运算符对其进行调用，或者将Reflect对象作为一个函数来调用。Reflect的所有属性和方法都是静态的（就像Math对象）</p>
+<p>Reflect.get(target, name, receiver)<br>Reflect.get方法查找并返回target对象的name属性，如果没有该属性返回undefined</p>
+<p>Reflect.set(target, name,value, receiver)<br>Reflect.set方法设置target对象的name属性等于value。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">type Person = &#123;</span><br><span class="line">    name: string,</span><br><span class="line">    age: number,</span><br><span class="line">    text: string</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">const proxy = (object: any, key: any) =&gt; &#123;</span><br><span class="line">    return new Proxy(object, &#123;</span><br><span class="line">        get(target, prop, receiver) &#123;</span><br><span class="line">            console.log(`get key======&gt;$&#123;key&#125;`);</span><br><span class="line">            return Reflect.get(target, prop, receiver)</span><br><span class="line">        &#125;,</span><br><span class="line"> </span><br><span class="line">        set(target, prop, value, receiver) &#123;</span><br><span class="line">            console.log(`set key======&gt;$&#123;key&#125;`);</span><br><span class="line"> </span><br><span class="line">            return Reflect.set(target, prop, value, receiver)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">const logAccess = (object: Person, key: &#x27;name&#x27; | &#x27;age&#x27; | &#x27;text&#x27;) =&gt; &#123;</span><br><span class="line">    return proxy(object, key)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">let man: Person = logAccess(&#123;</span><br><span class="line">    name: &quot;小满&quot;,</span><br><span class="line">    age: 20,</span><br><span class="line">    text: &quot;我的很小&quot;</span><br><span class="line">&#125;, &#x27;age&#x27;)</span><br><span class="line"> </span><br><span class="line">man.age  = 30</span><br><span class="line"> </span><br><span class="line">console.log(man);</span><br></pre></td></tr></table></figure>
+
+<p>使用泛型+keyof优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">type Person = &#123;</span><br><span class="line">    name: string,</span><br><span class="line">    age: number,</span><br><span class="line">    text: string</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">const proxy = (object: any, key: any) =&gt; &#123;</span><br><span class="line">    return new Proxy(object, &#123;</span><br><span class="line">        get(target, prop, receiver) &#123;</span><br><span class="line">            console.log(`get key======&gt;$&#123;key&#125;`);</span><br><span class="line">            return Reflect.get(target, prop, receiver)</span><br><span class="line">        &#125;,</span><br><span class="line"> </span><br><span class="line">        set(target, prop, value, receiver) &#123;</span><br><span class="line">            console.log(`set key======&gt;$&#123;key&#125;`);</span><br><span class="line"> </span><br><span class="line">            return Reflect.set(target, prop, value, receiver)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">const logAccess = &lt;T&gt;(object: T, key: keyof T): T =&gt; &#123;</span><br><span class="line">    return proxy(object, key)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">let man: Person = logAccess(&#123;</span><br><span class="line">    name: &quot;小满&quot;,</span><br><span class="line">    age: 20,</span><br><span class="line">    text: &quot;我的很小&quot;</span><br><span class="line">&#125;, &#x27;age&#x27;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">let man2 = logAccess(&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    name:&quot;小满2&quot;</span><br><span class="line">&#125;, &#x27;name&#x27;)</span><br><span class="line"> </span><br><span class="line">man.age = 30</span><br><span class="line"> </span><br><span class="line">console.log(man);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>案例简单实现一个mobx观察者模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const list: Set&lt;Function&gt; = new Set()</span><br><span class="line"> </span><br><span class="line">const autorun = (cb: Function) =&gt; &#123;</span><br><span class="line">    if (cb) &#123;</span><br><span class="line">        list.add(cb)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">const observable = &lt;T extends object&gt;(params: T) =&gt; &#123;</span><br><span class="line">    return new Proxy(params, &#123;</span><br><span class="line">        set(target, key, value, receiver) &#123;</span><br><span class="line">            const result = Reflect.set(target, key, value, receiver)</span><br><span class="line">            list.forEach(fn =&gt; fn())</span><br><span class="line">            console.log(list)</span><br><span class="line">            return result</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">const person = observable(&#123; name: &quot;小满&quot;, attr: &quot;威猛先生&quot; &#125;)</span><br><span class="line"> </span><br><span class="line">autorun(()=&gt;&#123;</span><br><span class="line">    console.log(&#x27;我变化了&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">person.attr = &#x27;威猛个捶捶&#x27;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://istomoyo.github.io">sakagami tomoyo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://istomoyo.github.io/posts/58732.html">https://istomoyo.github.io/posts/58732.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://istomoyo.github.io" target="_blank">Tomoyo</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/posts/56801.html" title="Ts(张天禹)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Ts(张天禹)</div></div><div class="info-2"><div class="info-item-1">第一章 快速入门0、TypeScript简介 TypeScript是JavaScript的超集。 它对JS进行了扩展，向JS中引入了类型的概念，并添加了许多新的特性。 TS代码需要通过编译器编译为JS，然后再交由JS解析器执行。 TS完全兼容JS，换言之，任何的JS代码都可以直接当成JS使用。 相较于JS而言，TS拥有了静态类型，更加严格的语法，更强大的功能；TS可以在代码执行前就完成代码的检查，减小了运行时异常的出现的几率；TS代码可以编译为任意版本的JS代码，可有效解决不同JS运行环境的兼容问题；同样的功能，TS的代码量要大于JS，但由于TS的代码结构更加清晰，变量类型更加明确，在后期代码的维护中TS却远远胜于JS。  1、TypeScript...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">sakagami tomoyo</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/istomoyo"><i class="fab fa-github"></i><span>Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/istomoyo" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1138629583@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E6%BB%A1-zs-TypeScript"><span class="toc-number">1.</span> <span class="toc-text">小满 zs-TypeScript</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-TypeScript19%EF%BC%88Mixins-%E6%B7%B7%E5%85%A5%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">学习 TypeScript19（Mixins 混入）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B7%B7%E5%85%A5"><span class="toc-number">1.2.1.</span> <span class="toc-text">对象混入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%B7%B7%E5%85%A5"><span class="toc-number">1.2.2.</span> <span class="toc-text">类的混入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-TypeScript20%EF%BC%88%E8%A3%85%E9%A5%B0%E5%99%A8-Decorator%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">学习 TypeScript20（装饰器 Decorator）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.3.1.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B7%A5%E5%8E%82"><span class="toc-number">1.3.2.</span> <span class="toc-text">装饰器工厂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E7%BB%84%E5%90%88"><span class="toc-number">1.3.3.</span> <span class="toc-text">装饰器组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">方法装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text">参数装饰器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-TypeScript22%EF%BC%88%E5%AE%9E%E6%88%98-TS-%E7%BC%96%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">学习 TypeScript22（实战 TS 编写发布订阅模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0typeScript%EF%BC%88weakMap%EF%BC%8CweakSet%EF%BC%8Cset%EF%BC%8Cmap%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">学习typeScript（weakMap，weakSet，set，map）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">1.5.1.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-number">1.5.2.</span> <span class="toc-text">Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WeakSet-%E5%92%8C-WeakMap"><span class="toc-number">1.5.3.</span> <span class="toc-text">WeakSet 和 WeakMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0TypeScript23%EF%BC%88TS%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95proxy-Reflect%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">学习TypeScript23（TS进阶用法proxy &amp; Reflect）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0proxy%E5%AF%B9%E8%B1%A1%E4%BB%A3%E7%90%86"><span class="toc-number">1.6.1.</span> <span class="toc-text">学习proxy对象代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reflect"><span class="toc-number">1.6.2.</span> <span class="toc-text">Reflect</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/58732.html" title="typescript-小满">typescript-小满</a><time datetime="2025-11-26T12:43:04.000Z" title="发表于 2025-11-26 20:43:04">2025-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/56801.html" title="Ts(张天禹)">Ts(张天禹)</a><time datetime="2025-11-14T15:45:21.000Z" title="发表于 2025-11-14 23:45:21">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/57292.html" title="jsNote">jsNote</a><time datetime="2025-04-11T14:39:33.000Z" title="发表于 2025-04-11 22:39:33">2025-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/31564.html" title="某某音乐搜索js逆向练习">某某音乐搜索js逆向练习</a><time datetime="2025-02-13T05:20:22.000Z" title="发表于 2025-02-13 13:20:22">2025-02-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/63693.html" title="hexo引入live2d看板娘">hexo引入live2d看板娘</a><time datetime="2025-02-11T12:36:23.000Z" title="发表于 2025-02-11 20:36:23">2025-02-11</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(-225deg, rgba(105, 234, 203, 0.9) 0%, rgba(234, 204, 248, 0.9) 48%, rgba(102, 84, 241, 0.9) 100%);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By sakagami tomoyo</div><div class="footer_custom_text"><p>
+  <a style="margin-inline:5px" target="_blank" href="https://hexo.io/">
+    <img no-lazy src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO">
+  </a>
+  <a style="margin-inline:5px" target="_blank" href="https://butterfly.js.org/">
+    <img no-lazy src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly">
+  </a>
+  <a style="margin-inline:5px" target="_blank" href="https://github.com/">
+    <img no-lazy src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站由 GitHub 托管" alt="GitHub">
+  </a>
+</p>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'istomoyo/istomoyo.github.io',
+      'data-repo-id': 'R_kgDONcWmIA',
+      'data-category-id': 'DIC_kwDONcWmIM4Cm3Pm',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="9414534383" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
